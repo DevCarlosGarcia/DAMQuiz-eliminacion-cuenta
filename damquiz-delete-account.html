@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+    Página: Eliminación de cuenta - DAMQuiz
+    Propósito: Ofrecer a los usuarios instrucciones claras para solicitar la eliminación de su cuenta y datos asociados.
+    Alojamiento previsto: GitHub Pages (estático). No hay backend. El envío se realiza vía "mailto:" o redirección al correo.
+    Nota: Sustituye __DEV_CONTACT_EMAIL__ por tu correo de soporte.
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eliminar cuenta · DAMQuiz</title>
+
+  <!-- Metadatos básicos para buscadores y previews -->
+  <meta name="description" content="Solicita la eliminación de tu cuenta de DAMQuiz y de los datos asociados.">
+  <meta property="og:title" content="Eliminar cuenta · DAMQuiz">
+  <meta property="og:description" content="Guía para borrar tu cuenta y datos asociados.">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* ===== Estilos mínimos, accesibles y agradables ===== */
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --card-2: #0d1524;
+      --text: #e8eef8;
+      --muted: #a8b3c7;
+      --accent: #4f8cff;
+      --ok: #2ecc71;
+      --warn: #ffb020;
+      --danger: #ff5c5c;
+      --border: #22304a;
+      --shadow: 0 10px 30px rgba(0,0,0,.3);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      background: radial-gradient(1200px 600px at 70% -10%, #172340 0%, var(--bg) 60%) fixed;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+    .card {
+      background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px 0;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; margin-top: 24px; }
+    p { margin: 10px 0; color: var(--text); }
+    .muted { color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 1000px;
+      background: rgba(79,140,255,.12);
+      color: var(--accent);
+      border: 1px solid rgba(79,140,255,.35);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: .3px;
+    }
+    .list { margin: 8px 0 0 0; padding-left: 20px; }
+    .list li { margin: 6px 0; }
+    .panel {
+      background: rgba(255,255,255,.03);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+    .row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 700px) { .row { grid-template-columns: 1fr 1fr; } }
+    label { display: block; font-weight: 700; margin-bottom: 6px; }
+    input, textarea, button, select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1326;
+      color: var(--text);
+      padding: 12px 14px;
+      outline: none;
+    }
+    input::placeholder, textarea::placeholder { color: #93a1ba; }
+    button {
+      background: linear-gradient(180deg, #5b93ff, #3c74ff);
+      border: none;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      transition: transform .06s ease, filter .15s ease;
+    }
+    button:hover { filter: brightness(1.04); }
+    button:active { transform: translateY(1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .kpi {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 700; color: var(--ok);
+    }
+    .danger { color: var(--danger); }
+    .footer {
+      margin-top: 20px; font-size: 13px; color: var(--muted);
+    }
+    .u {
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,.5);
+      text-underline-offset: 3px;
+    }
+    .strong { font-weight: 800; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-labelledby="title">
+      <!-- Título principal con icono Unicode -->
+      <div class="badge">🗑️ &nbsp;Gestión de cuenta</div>
+      <h1 id="title"><span class="strong">Eliminar cuenta</span> · DAMQuiz</h1>
+      <p class="muted">Esta página te permite solicitar la <span class="u">eliminación de tu cuenta</span> y de los datos asociados en
+        Firebase Authentication. No vendemos datos y usamos cifrado en tránsito (HTTPS).</p>
+
+      <!-- Resumen de lo que ocurrirá -->
+      <div class="panel" role="status" aria-live="polite">
+        <p class="kpi">✅ La solicitud borra <span class="strong">tu cuenta de acceso (email)</span> en Firebase.</p>
+        <p class="muted">Si además existieran datos asociados a funcionalidades opcionales, también se eliminarán o anonimizarán.
+           Conservaremos únicamente lo que la ley nos obligue (si aplica).</p>
+      </div>
+
+      <!-- Formulario "estático": prepara un mail con asunto y cuerpo; no hay backend. -->
+      <h2>✉️ Solicitud rápida por correo</h2>
+      <p>Rellena el formulario y pulsa <span class="strong">Enviar solicitud</span>; se abrirá tu cliente de correo con los datos preparados. 
+        También puedes escribirnos directamente a <a id="mailLink" class="u" href="mailto:__DEV_CONTACT_EMAIL__">__DEV_CONTACT_EMAIL__</a>.</p>
+
+      <form id="deleteForm" class="row" aria-describedby="disclaimer">
+        <div>
+          <label for="email">Correo de la cuenta (obligatorio)</label>
+          <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div>
+          <label for="reason">Motivo (opcional)</label>
+          <input id="reason" name="reason" type="text" placeholder="Ej.: No quiero seguir usando la app">
+        </div>
+        <div style="grid-column: 1 / -1;">
+          <label for="confirm" class="muted">Confirmación</label>
+          <select id="confirm" required>
+            <option value="">— Selecciona una opción —</option>
+            <option value="yes">Confirmo que quiero eliminar mi cuenta de DAMQuiz</option>
+          </select>
+        </div>
+        <div style="grid-column: 1 / -1; display:flex; gap:12px; align-items:center; justify-content:flex-start;">
+          <button type="submit" aria-label="Enviar solicitud por correo">Enviar solicitud</button>
+          <button type="button" class="btn-outline" id="openMail" aria-label="Abrir correo con plantilla">Abrir correo</button>
+        </div>
+      </form>
+
+      <p id="disclaimer" class="muted" style="margin-top:10px;">
+        ℹ️ Este formulario no envía datos automáticamente. Prepara un correo a <span class="mono">__DEV_CONTACT_EMAIL__</span> 
+        con el asunto y el cuerpo listos para que lo revises antes de enviar.
+      </p>
+
+      <!-- Detalle legal breve -->
+      <h2>🔒 ¿Qué datos se borran?</h2>
+      <ul class="list">
+        <li><span class="strong">Tu cuenta de acceso (email)</span> en Firebase Authentication.</li>
+        <li>Datos de uso necesarios para seguridad/fraude pueden conservarse en registros agregados/anónimos.</li>
+        <li>No conservamos datos personales con fines comerciales.</li>
+      </ul>
+
+      <h2>⏱️ Plazo de tramitación</h2>
+      <p>Procesamos la solicitud en un plazo estimado de <span class="strong">30 días naturales</span>. 
+        Si necesitas urgencia, indícalo en el mensaje.</p>
+
+      <h2>📩 Contacto</h2>
+      <p>Si tienes dudas, escribe a <a class="u" href="mailto:__DEV_CONTACT_EMAIL__">__DEV_CONTACT_EMAIL__</a>.</p>
+
+      <div class="footer">
+        <p>© <span id="year"></span> DAMQuiz. Todos los derechos reservados.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== JavaScript mínimo para construir el mailto con asunto/cuerpo =====
+    (function(){
+      const emailInput = document.getElementById('email');
+      const reasonInput = document.getElementById('reason');
+      const confirmSelect = document.getElementById('confirm');
+      const form = document.getElementById('deleteForm');
+      const openBtn = document.getElementById('openMail');
+      const devEmail = '__DEV_CONTACT_EMAIL__'; // SUSTITUIR por tu correo real
+
+      function buildMailto() {
+        // Construye el asunto y el cuerpo del correo con codificación URL
+        const user = (emailInput.value || '').trim();
+        const reason = (reasonInput.value || '').trim();
+        const subject = `Solicitud de eliminación de cuenta - DAMQuiz`;
+        const lines = [
+          `Hola,`,
+          ``,
+          `Solicito la eliminación de mi cuenta en DAMQuiz.`,
+          `Correo de la cuenta: ${user || '(pendiente)'} `,
+          reason ? `Motivo (opcional): ${reason}` : ``,
+          ``,
+          `Confirmo que soy el titular de la cuenta y comprendo que esta acción es irreversible.`,
+          ``,
+          `Gracias.`
+        ].filter(Boolean);
+        const body = encodeURIComponent(lines.join('\\n'));
+        const mailto = `mailto:${encodeURIComponent(devEmail)}?subject=${encodeURIComponent(subject)}&body=${body}`;
+        return mailto;
+      }
+
+      function openMailto(e){
+        if (e) e.preventDefault();
+        const mailto = buildMailto();
+        window.location.href = mailto;
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        // Validación simple: email + confirmación
+        if (!emailInput.value.trim()) {
+          alert('Introduce el correo de la cuenta.');
+          emailInput.focus();
+          return;
+        }
+        if (confirmSelect.value !== 'yes') {
+          alert('Confirma que deseas eliminar tu cuenta.');
+          confirmSelect.focus();
+          return;
+        }
+        openMailto();
+      });
+
+      openBtn.addEventListener('click', openMailto);
+
+      // Año dinámico en el pie
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
